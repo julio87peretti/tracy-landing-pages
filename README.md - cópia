@@ -1,0 +1,112 @@
+# Tracy — LP "Tráfego não precisa ser difícil"
+
+Landing page de campanha focada na dor: medo / dificuldade de fazer tráfego pago.
+
+## Estrutura
+
+```
+tracy-lp-trafego/
+├── index.html         # Estrutura e conteúdo
+├── styles.css         # Todo o visual
+├── script.js          # Scroll reveal + tracking de eventos
+└── assets/
+    ├── logo.svg
+    └── favicon.svg
+```
+
+## Como editar o copy
+
+Todo o texto está no `index.html`. Abra em qualquer editor (VS Code recomendado) e edite direto. As seções estão comentadas:
+
+- `<!-- HERO -->` — headline e CTA principal
+- `<!-- MITOS vs REALIDADE -->` — 3 cards de objeção
+- `<!-- COMPARATIVO -->` — Sem Tracy vs Com Tracy
+- `<!-- DEMO VISUAL / COMO FUNCIONA -->` — 3 passos
+- `<!-- VIDEO/DEMO PLACEHOLDER -->` — área do vídeo demo
+- `<!-- FEATURES RESUMIDAS -->` — 6 features
+- `<!-- CTA FINAL -->` — última chamada
+
+## Como testar localmente
+
+Duas opções:
+
+**Opção 1 — Abrir o arquivo direto**
+Dê duplo clique no `index.html`. Abre no navegador.
+
+**Opção 2 — Servidor local (recomendado)**
+Se tiver Node ou Python instalado:
+```bash
+# Com Python
+cd tracy-lp-trafego
+python3 -m http.server 8000
+# Abra http://localhost:8000
+
+# Com Node
+npx serve tracy-lp-trafego
+```
+
+## Como subir na Vercel
+
+**Jeito mais simples (sem terminal):**
+1. Acesse https://vercel.com/new
+2. Arraste a pasta `tracy-lp-trafego` inteira na tela
+3. Clique em Deploy
+4. Pronto — a Vercel gera uma URL
+
+**Jeito com GitHub (recomendado pra múltiplas LPs):**
+1. Suba a pasta num repositório do GitHub
+2. Conecte o repo na Vercel
+3. Cada push faz deploy automático
+4. Você pode configurar domínios tipo `trafego.tracyleads.com`
+
+## Tracking / Ads
+
+O `script.js` já dispara eventos pra:
+- **Google Tag Manager / GA4** via `dataLayer.push`
+- **Meta Pixel** via `fbq('trackCustom', 'CTAClick')`
+
+Eventos rastreados:
+- `header_cta` — clique no CTA do header
+- `hero_cta` — clique no CTA principal
+- `hero_watch` — clique em "Ver como funciona"
+- `final_cta` — clique no CTA final
+- `demo_video_click` — clique no vídeo
+
+**Pra ativar o GTM:** descomente o bloco `<script>` do GTM no `<head>` do index.html e substitua `GTM-XXXX` pelo seu ID.
+
+**Pra ativar o Meta Pixel:** adicione o snippet do Meta no `<head>` do index.html.
+
+## SEO já configurado
+
+- Meta title e description otimizados
+- Open Graph (Facebook, LinkedIn, WhatsApp)
+- Twitter Cards
+- Schema.org (SoftwareApplication)
+- Canonical URL
+- Favicon
+- Estrutura semântica (header, main, section, footer)
+
+**Antes de subir em produção, ajuste:**
+- A URL canonical no `<link rel="canonical">` pra URL real da LP
+- A imagem OG (`og-trafego-simples.png` — crie uma 1200x630 no Figma com a headline)
+- O endpoint do botão "Começar grátis" pra `/get-started` do Tracy real
+
+## Duplicando pra novas LPs
+
+Pra criar a próxima LP com copy diferente:
+1. Duplique a pasta `tracy-lp-trafego` e renomeie (ex: `tracy-lp-agencias`)
+2. Edite só o `index.html` — troque headline, subheadline e copy das seções
+3. O `styles.css` e `script.js` ficam iguais (consistência visual entre LPs)
+4. Suba como novo projeto na Vercel
+
+## Ajustes visuais (cores, etc.)
+
+Todas as cores estão em variáveis CSS no topo do `styles.css`, seção `:root`:
+```css
+--brand-magenta: #BC40DC;
+--brand-violet: #5049EF;
+--brand-blue: #0050FF;
+--brand-cyan: #14B8A6;
+```
+
+Mudou o tom? Basta alterar a variável e aplica em toda a LP.
